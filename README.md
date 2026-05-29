@@ -15,9 +15,30 @@ For a comprehensive visual architecture guide, see:
 
 ### Architecture Overview
 
-<p align="center">
-  <img src="docs/images/arch.png" alt="Playwright Framework Architecture" width="800"/>
-</p>
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        TEST LAYER (*.spec.ts)                       │
+│         login.spec.ts │ product.spec.ts │ checkout.spec.ts          │
+└──────────────────────────────┬──────────────────────────────────────┘
+                               │ uses
+┌──────────────────────────────▼──────────────────────────────────────┐
+│                      MODULE LAYER (*Module.ts)                      │
+│        LoginModule │ ProductModule │ CheckoutModule                 │
+└──────────────────────────────┬──────────────────────────────────────┘
+                               │ uses
+┌──────────────────────────────▼──────────────────────────────────────┐
+│                       PAGE LAYER (*Page.ts)                         │
+│         LoginPage │ HomePage │ ProductPage │ CheckoutPage           │
+└──────────────────────────────┬──────────────────────────────────────┘
+                               │
+          ┌────────────────────┼────────────────────┐
+          ▼                    ▼                    ▼
+    ┌───────────┐       ┌───────────┐       ┌───────────┐
+    │ Fixtures  │       │ API Layer │       │  Utilities│
+    │ (auth,    │       │ (AuthApi, │       │ (Logger,  │
+    │  pages)   │       │  Products)│       │  Helpers) │
+    └───────────┘       └───────────┘       └───────────┘
+```
 
 ---
 
@@ -416,8 +437,6 @@ const uuid = DataGenerator.uuid(); // 550e8400-e29b-41d4-a716-446655440000
 
 ---
 
-## 📊 Custom TTA Reporter
-
 ## 📊 Custom Reporter
 
 This framework includes a **Custom HTML Reporter** - a beautiful, modern HTML reporter with real-time test execution updates.
@@ -435,7 +454,7 @@ This framework includes a **Custom HTML Reporter** - a beautiful, modern HTML re
 ### Report Screenshot
 
 <p align="center">
-  <img src="docs/images/report.png" alt="TTA Custom Reporter Screenshot" width="800"/>
+  <img src="docs/images/report.png" alt="Custom Reporter Screenshot" width="800"/>
 </p>
 
 ### Usage
@@ -467,7 +486,11 @@ test('example test', async ({ page }) => {
 
 Reports are generated in `tta-report/` directory with timestamped filenames.
 
-Reports are generated in `tta-report/` directory with timestamped filenames. tests, view the HTML report:
+---
+
+## 📈 Reports
+
+After running tests, view the HTML report:
 
 ```bash
 npm run test:report
@@ -475,7 +498,7 @@ npm run test:report
 
 Reports are generated in:
 
-- `tta-report/` - Custom TTA HTML reports (recommended)
+- `tta-report/` - Custom HTML reports (recommended)
 - `playwright-report/` - Default Playwright HTML report
 - `test-results/` - JSON results and screenshots
 
