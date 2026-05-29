@@ -451,12 +451,6 @@ This framework includes a **Custom HTML Reporter** - a beautiful, modern HTML re
 | 🔍 **Filters** | Filter by Priority (P0, P1, P2) and Status (Passed/Failed/Skipped) |
 | ⏱️ **Real-time Updates** | Live console output during test execution |
 
-### Report Screenshot
-
-<p align="center">
-  <img src="docs/images/report.png" alt="Custom Reporter Screenshot" width="800"/>
-</p>
-
 ### Usage
 
 The reporter is automatically configured in `playwright.config.ts`:
